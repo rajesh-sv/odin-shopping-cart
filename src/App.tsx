@@ -13,10 +13,19 @@ const theme = createTheme({
 
 export default function App({ page }: { page: string }) {
   const [inCart, setInCart] = useState(new Map())
-  const [productDetails, setProductDetails] = useState<ProductType[]>([])
+  const [productDetails, setProductDetails] = useState<ProductInCartType[]>([])
+  const [allProducts, setAllProducts] = useState<ProductType[]>([])
 
   useEffect(() => {
-    const products: ProductType[] = []
+    async function getAllProducts() {
+      const res = await fetch("https://fakestoreapi.com/products")
+      return await res.json()
+    }
+    getAllProducts().then((data) => setAllProducts(data))
+  }, [])
+
+  useEffect(() => {
+    const products: ProductInCartType[] = []
     inCart.forEach(async (qty, productId) => {
       const res = await fetch(`https://fakestoreapi.com/products/${productId}`)
       const product = await res.json()
@@ -38,12 +47,22 @@ export default function App({ page }: { page: string }) {
       {page === "home" ? (
         <Home />
       ) : page === "shop" ? (
-        <Shop addToCart={addToCart} inCart={inCart} />
+        <Shop addToCart={addToCart} inCart={inCart} allProducts={allProducts} />
       ) : (
         <Cart productDetails={productDetails} />
       )}
     </MantineProvider>
   )
+}
+
+interface ProductInCartType {
+  id: number
+  title: string
+  description: string
+  category: string
+  price: string
+  image: string
+  quantity: number
 }
 
 interface ProductType {
@@ -53,5 +72,4 @@ interface ProductType {
   category: string
   price: string
   image: string
-  quantity: number
 }

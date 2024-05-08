@@ -15,8 +15,6 @@ const router = createBrowserRouter([
   {
     path: "/shop",
     element: <App page="shop" />,
-    loader: async () =>
-      fetch("https://fakestoreapi.com/products").then((res) => res.json()),
   },
   {
     path: "/cart",

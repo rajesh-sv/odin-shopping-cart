@@ -1,6 +1,6 @@
 import { ScrollArea, Space, Table } from "@mantine/core"
 
-function Cart({ productDetails }: { productDetails: ProductType[] }) {
+function Cart({ productDetails }: { productDetails: ProductInCartType[] }) {
   let totalAmt = 0
 
   const rows = productDetails.map((product, index) => {
@@ -52,7 +52,7 @@ function Cart({ productDetails }: { productDetails: ProductType[] }) {
   )
 }
 
-interface ProductType {
+interface ProductInCartType {
   id: number
   title: string
   description: string
