@@ -6,7 +6,7 @@ Made **with**:
 - React Router
 - Vite
 - Maintine
-- BestBuy API
+- Fakestore API
 
 ## Specifications
 
