@@ -7,7 +7,7 @@ import {
 } from "@tabler/icons-react"
 import { Link, useNavigate } from "react-router-dom"
 
-function Header({ page }: { page: string }) {
+function Header({ page, cartCount }: { page: string; cartCount: number }) {
   const navigate = useNavigate()
   return (
     <header>
@@ -54,7 +54,7 @@ function Header({ page }: { page: string }) {
                 label: (
                   <Center style={{ gap: 10 }}>
                     <IconShoppingCart size={20} />
-                    <span>Cart</span>
+                    <span>Cart {cartCount}</span>
                   </Center>
                 ),
               },

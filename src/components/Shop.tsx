@@ -12,7 +12,13 @@ import {
 } from "@mantine/core"
 import { useLoaderData } from "react-router-dom"
 
-function Shop() {
+function Shop({
+  addToCart,
+  inCart,
+}: {
+  addToCart: (productId: number) => void
+  inCart: Map<number, number>
+}) {
   const products = useLoaderData()
   return (
     <ScrollArea
@@ -55,7 +61,12 @@ function Shop() {
                   {product.description}
                 </Text>
 
-                <Button variant="outline" color="blue" fullWidth>
+                <Button
+                  variant="outline"
+                  color="blue"
+                  fullWidth
+                  onClick={() => addToCart(product.id)}
+                >
                   Add to cart
                 </Button>
               </Card>
