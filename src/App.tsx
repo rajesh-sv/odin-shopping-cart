@@ -13,7 +13,6 @@ const theme = createTheme({
 
 export default function App({ page }: { page: string }) {
   const [inCart, setInCart] = useState(new Map())
-  const [productDetails, setProductDetails] = useState<ProductInCartType[]>([])
   const [allProducts, setAllProducts] = useState<ProductType[]>([])
 
   useEffect(() => {
@@ -24,15 +23,11 @@ export default function App({ page }: { page: string }) {
     getAllProducts().then((data) => setAllProducts(data))
   }, [])
 
-  useEffect(() => {
-    const products: ProductInCartType[] = []
-    inCart.forEach(async (qty, productId) => {
-      const res = await fetch(`https://fakestoreapi.com/products/${productId}`)
-      const product = await res.json()
-      products.push({ ...product, quantity: qty })
-    })
-    setProductDetails(products)
-  }, [inCart])
+  const productDetails: ProductInCartType[] = []
+  for (const product of allProducts) {
+    if (inCart.has(product.id))
+      productDetails.push({ ...product, quantity: inCart.get(product.id) })
+  }
 
   let cartCount = 0
   for (const val of inCart.values()) cartCount += val
@@ -41,15 +36,34 @@ export default function App({ page }: { page: string }) {
     inCart.set(productId, (inCart.get(productId) ?? 0) + 1)
     setInCart(new Map(inCart))
   }
+
+  const removeFromCart = function (productId: number) {
+    const productQty = inCart.get(productId)
+    if (productQty === 1) {
+      inCart.delete(productId)
+    } else {
+      inCart.set(productId, productQty - 1)
+    }
+    setInCart(new Map(inCart))
+  }
   return (
     <MantineProvider defaultColorScheme="auto" theme={theme}>
       <Header page={page} cartCount={cartCount} />
       {page === "home" ? (
         <Home />
       ) : page === "shop" ? (
-        <Shop addToCart={addToCart} inCart={inCart} allProducts={allProducts} />
+        <Shop
+          addToCart={addToCart}
+          removeFromCart={removeFromCart}
+          inCart={inCart}
+          allProducts={allProducts}
+        />
       ) : (
-        <Cart productDetails={productDetails} />
+        <Cart
+          addToCart={addToCart}
+          removeFromCart={removeFromCart}
+          productDetails={productDetails}
+        />
       )}
     </MantineProvider>
   )

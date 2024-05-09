@@ -9,14 +9,18 @@ import {
   Button,
   GridCol,
   Image,
+  ActionIcon,
 } from "@mantine/core"
+import { IconMinus, IconPlus } from "@tabler/icons-react"
 
 function Shop({
   addToCart,
+  removeFromCart,
   inCart,
   allProducts,
 }: {
   addToCart: (productId: number) => void
+  removeFromCart: (productId: number) => void
   inCart: Map<number, number>
   allProducts: ProductType[]
 }) {
@@ -52,15 +56,34 @@ function Shop({
               <Text size="sm" c="dimmed" lineClamp={5}>
                 {product.description}
               </Text>
-
-              <Button
-                variant="outline"
-                color="blue"
-                fullWidth
-                onClick={() => addToCart(product.id)}
-              >
-                Add to cart
-              </Button>
+              {inCart.has(product.id) ? (
+                <Group>
+                  <ActionIcon
+                    onClick={() => removeFromCart(product.id)}
+                    size="sm"
+                    variant="light"
+                  >
+                    <IconMinus size={12} />
+                  </ActionIcon>
+                  {inCart.get(product.id)}
+                  <ActionIcon
+                    onClick={() => addToCart(product.id)}
+                    size="sm"
+                    variant="light"
+                  >
+                    <IconPlus size={12} />
+                  </ActionIcon>
+                </Group>
+              ) : (
+                <Button
+                  variant="outline"
+                  color="teal"
+                  fullWidth
+                  onClick={() => addToCart(product.id)}
+                >
+                  Add to cart
+                </Button>
+              )}
             </Card>
           </GridCol>
         ))}

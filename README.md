@@ -15,4 +15,3 @@ Made **with**:
 1. On your shopping cart route, a user should see a sticky bar (it can be just a top section as well), which displays the number of items currently in the cart.
 1. Build individual card items for each of your products. Also, add an increment and decrement button next to it for fine-tuning. You can also display a title for each product as well as an “Add To Cart” button.
 1. Once a user has submitted their order, the amount on the cart itself should adjust.
-1. Make sure to test your app thoroughly using the React Testing Library. Take care that you don’t directly test react-router-dom, since it is an external library and the developers working on it must have tested the library already.

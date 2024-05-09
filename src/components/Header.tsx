@@ -6,6 +6,7 @@ import {
   IconShoppingCart,
 } from "@tabler/icons-react"
 import { Link, useNavigate } from "react-router-dom"
+import ThemeToggle from "./ThemeToggle"
 
 function Header({ page, cartCount }: { page: string; cartCount: number }) {
   const navigate = useNavigate()
@@ -60,6 +61,7 @@ function Header({ page, cartCount }: { page: string; cartCount: number }) {
               },
             ]}
           />
+          <ThemeToggle />
         </Group>
       </Overlay>
     </header>
