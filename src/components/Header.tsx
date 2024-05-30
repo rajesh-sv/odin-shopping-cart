@@ -1,6 +1,6 @@
 import { Button, Group, Overlay, SegmentedControl, Center } from "@mantine/core"
 import {
-  IconDeviceGamepad2,
+  IconBasket,
   IconHome2,
   IconRosetteDiscount,
   IconShoppingCart,
@@ -19,9 +19,9 @@ function Header({ page, cartCount }: { page: string; cartCount: number }) {
             variant="subtle"
             component={Link}
             to="/home"
-            leftSection={<IconDeviceGamepad2 size={32} />}
+            leftSection={<IconBasket size={32} />}
           >
-            Odin Gaming Store
+            Shopping Cart
           </Button>
           <SegmentedControl
             color="teal"

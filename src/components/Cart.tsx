@@ -71,7 +71,7 @@ function Cart({
           <Table.Td></Table.Td>
           <Table.Td></Table.Td>
           <Table.Th>Total Amount</Table.Th>
-          <Table.Td>{Math.round(totalAmt * 100) / 100}</Table.Td>
+          <Table.Td>{`$${Math.round(totalAmt * 100) / 100}`}</Table.Td>
         </Table.Tfoot>
       </Table>
     </ScrollArea>

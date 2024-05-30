@@ -18,13 +18,13 @@ export function Home() {
             variant="gradient"
             gradient={{ from: "yellow", to: "red", deg: 90 }}
           >
-            One stop to satisfy all your Gaming needs.
+            Buy clothes, SSDs, Monitors & Gold!
           </Text>
         </Title>
         <Text className={classes.description} size="xl" mt="xl">
-          Build the gaming PC that you dream about every night. Buy genuine
-          gaming accesories with 2 year warranty. We deliver to all the regions
-          of the world, even the artic circle.
+          I have to fill something here so that the home page looks good. So let
+          me give you a quote "Only a few know, how much one must know to know
+          how little one knows." - Werner Heisenberg
         </Text>
 
         <Button
